@@ -52,7 +52,7 @@ $(function () {
         $.ajax({
             type:'post',
             url:'/employee/employeeLogin',
-            data:$form.serialize(),
+            data:$form.serialize(), //表单序列化
             datatype:JSON,
             success:function(data){
                 // console.log(data);
