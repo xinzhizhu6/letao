@@ -19,12 +19,21 @@ a:link, a:visited, a:hover, a:active {
   list-style: none;
 }
 
+.table.table-bordered td{
+  vertical-align: middle;
+  text-align: center;
+}
+
 .body_bg{
   background-color: #222d32;
 }
 
 .mt_150{
   margin-top: 150px;
+}
+
+.mb_20{
+  margin-bottom: 20px;
 }
 
 .panel h4 {
@@ -129,4 +138,24 @@ a:link, a:visited, a:hover, a:active {
 .pic_right {
   width: 45%;
   height: 400px;
+}
+
+.fileupload_box{
+  width: 82px;
+  height: 34px;
+  position: relative;
+}
+
+.fileupload_box:hover button{
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+.fileupload_box input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
 }
