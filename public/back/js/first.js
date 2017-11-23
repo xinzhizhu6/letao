@@ -1,86 +1,95 @@
-$(function () {
-    //去后端获取数据 渲染页面
+$(function(){
     var currentPage = 1;
     var pageSize = 5;
 
-    //渲染页面
-    render();
+    render()
 
-    function render() {
-        //请求ajax
+    function render(){
         $.ajax({
-            type: "get",
-            url: "/category/queryTopCategoryPaging",
-            data: {
-                page: currentPage,
-                pageSize: pageSize,
+            type:"get",
+            url:"/category/queryTopCategoryPaging",
+            data:{
+                page:currentPage,
+                pageSize:pageSize,
             },
-            success: function (data) {
-                console.log(data);
-
-                $("tbody").html(template("tpl", data));
-
+            success:function(data){
+    
+                $("tbody").html( template("tpl",data) );
+    
                 //渲染分页
                 $("#paginator").bootstrapPaginator({
-                    bootstrapMajorVersion: 3,
-                    currentPage: currentPage,
-                    totalPages: Math.ceil(data.total / pageSize),
-                    onPageClicked: function (a, b, c, page) {
+                    bootstrapMajorVersion:3,
+                    currentPage:currentPage,
+                    totalPages:Math.ceil(data.total / pageSize),
+                    itemTexts: function(type, page, current) { //修改显示文字
+                        switch (type) {
+                        case "first":
+                            return "首页";
+                        case "prev":
+                            return "上一页";
+                        case "next":
+                            return "下一页";
+                        case "last":
+                            return "末页";
+                        case "page":
+                            return page;
+                        }
+                    },
+                    onPageClicked:function(a,b,c,page){
                         currentPage = page;
-                        render()
+                        render();
                     }
                 })
             }
+    
         })
     }
 
-    //点击添加分类 模块框显示
+    //添加功能
     $(".btn_add").on("click",function(){
-        $("#addModal").modal("show");
+        $("#addModal").modal('show');
     })
 
-
-    //表单校验 
-    var $form = $('form');
+    //表单校验功能
+    var $form = $('#form');
     $form.bootstrapValidator({
         feedbackIcons:{
             valid: 'glyphicon glyphicon-ok',
             invalid:'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
-
         fields:{
-            categoryName : {
+            categoryName:{
                 validators:{
                     notEmpty:{
-                        message : "请输入一级分类名称"
+                        message:"请输入一级分类"
                     }
                 }
             }
         }
     })
 
-    //注册表单校验成功事件
+    //表单校验成功事件
     $form.on("success.form.bv",function(e){
-        //阻止默认事件的发生
         e.preventDefault();
 
-        //发送ajax的请求
         $.ajax({
             type:"post",
             url:"/category/addTopCategory",
             data:$form.serialize(),
             success:function(data){
-                //关闭模态框
-                $("#addModal").modal("hide");
+                if(data.success){
+                    //关闭模态框
+                    $("#addModal").modal('hide');
 
-                //重新渲染第一面
-                currentPage = 1;
-                render();
+                    //重新渲染第一页
+                    currentPage = 1;
+                    render();
 
-                //清除表单数据
-                $form.data("bootstrapValidator").resetForm();
-                $form[0].reset();
+                    //把模态框中的数据重置
+                    $form.data("bootstrapValidator").resetForm();
+                    $form[0].reset();
+                }
             }
         })
     })

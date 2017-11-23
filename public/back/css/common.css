@@ -133,6 +133,7 @@ a:link, a:visited, a:hover, a:active {
   line-height: 50px;
 }
 
+
 /*报表*/
 .pic_left,
 .pic_right {
@@ -158,4 +159,8 @@ a:link, a:visited, a:hover, a:active {
   left: 0;
   width: 100%;
   opacity: 0;
+}
+
+table thead tr th{
+  text-align: center;
 }

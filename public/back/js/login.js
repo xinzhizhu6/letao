@@ -58,17 +58,17 @@ $(function () {
                 // console.log(data);
                 if(data.success){
                     //登录成功 跳转到主页
-                    location.href = "index.html"
+                    location.href = "index.html";
                 }
                 if(data.error === 1000){
                     //用户名不存在
                     // alert("用户名不存在")
-                    $form.data('bootstrapValidator').updateStatus('username','INVALID','callback')
+                    $form.data('bootstrapValidator').updateStatus('username','INVALID','callback');
                 }
                 if(data.error === 1001)
                     //密码错误
                     // alert("密码错误")
-                    $form.data('bootstrapValidator').updateStatus('password','INVALID','callback')
+                    $form.data('bootstrapValidator').updateStatus('password','INVALID','callback');
             }
         })
     })
