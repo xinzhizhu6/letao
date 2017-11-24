@@ -153,23 +153,44 @@
                                     <input type="hidden" name="hot" value="1">
                                 </div>
                             </div>
+                            <!--商品名称-->
                             <div class="form-group">
                                 <input type="text" class="form-control" name="proName" placeholder="请输入商品名称">
                             </div>
+                            <!--商品描述-->
                             <div class="form-group">
-                                <input type="text" class="form-control" name="proDesc" placeholder="请输入商品描述">
+                                <textarea class="form-control" rows="3" name="proDesc" placeholder="请输入商品的描述"></textarea>
                             </div>
+                            <!--商品库存-->
                             <div class="form-group">
                                 <input type="text" class="form-control" name="num" placeholder="请输入商品库存">
                             </div>
+                            <!--商品尺码-->
                             <div class="form-group">
                                 <input type="text" class="form-control" name="size" placeholder="请输入商品尺码">
                             </div>
+                            <!--商品原价-->
                             <div class="form-group">
-                                <input type="text" class="form-control" name="oldPrice" placeholder="请输入商品价格">
+                                <input type="text" class="form-control" name="oldPrice" placeholder="请输入商品原价">
                             </div>
+                            <!--商品价格-->
                             <div class="form-group">
                                 <input type="text" class="form-control" name="price" placeholder="请输入商品价格">
+                                <input type="hidden" name="statu" value="1">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="fileupload_box">
+                                    <button class="btn btn-default">上传图片</button>
+                                    <input type="file" class="btn btn-default" name="pic1" id="fileupload" data-url="/product/addProductPic" multiple>
+                                </div>
+                            </div>
+
+                            <div class="form-group img_box">
+                                <!--<img src="images/none.png" width="100" height="100" alt="">-->
+                                <!--<img src="images/none.png" width="100" height="100" alt="">-->
+                                <!--<img src="images/none.png" width="100" height="100" alt="">-->
+                                <input type="hidden" name="brandLogo">
                             </div>
 
                         </form>
@@ -181,6 +202,8 @@
                 </div>
             </div>
         </div>
+
+
 
     </div>
 
@@ -207,12 +230,16 @@
 
     <script type="text/html" id="tpl2">
         {{each rows v i}}
-        <li><a href="javascript:;">{{v.brandName}}</a></li>
+        <li>
+            <a data-id="{{v.id}}" href="javascript:;">{{v.brandName}}</a>
+        </li>
         {{/each}}
     </script>
 
 
     <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/jquery-fileupload/jquery.ui.widget.js"></script>
+    <script src="lib/jquery-fileupload/jquery.fileupload.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
     <script src="lib/bootstrap-paginator/bootstrap-paginator.js"></script>
