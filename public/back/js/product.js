@@ -172,7 +172,6 @@ $(function () {
             //2. 把结果存储起来，添加的时候需要使用
             imgs.push(data.result);
             
-            
             //3.判断数组长度,如果是3 手动让brandLogo 校验成功
             if(imgs.length === 3){
                 $form.data("bootstrapValidator").updateStatus("brandLogo" , "VALID");

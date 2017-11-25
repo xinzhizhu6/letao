@@ -5,7 +5,7 @@ $(function () {
         type: "get",
         url: "/category/queryTopCategory",
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             $(".lt_category_l .mui-scroll").html(template("tpl_l", data));
 
 
@@ -23,7 +23,7 @@ $(function () {
                 id: id
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 $(".lt_category_r .mui-scroll").html(template('tpl_r', data))
             }
         })
