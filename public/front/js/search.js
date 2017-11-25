@@ -26,8 +26,13 @@ $(function () {
     //清空历史记录
     $(".lt_history").on("click", ".btn_empty", function () {
         // console.log(1)
-        localStorage.removeItem("lt_search_history");
-        render();
+        mui.confirm("您是否要清空所有的历史记录?", "温馨提示", ["取消", "确定"], function (e) {
+            if (e.index == 1) {
+                localStorage.removeItem("lt_search_history");
+                render();
+            }
+        })
+
     })
 
     //3. 删除搜索列表
@@ -39,14 +44,19 @@ $(function () {
     //3.6 重新渲染
 
     $(".lt_history").on("click", ".btn_delete", function () {
-        var arr = getHistory();
-        var index = $(this).data("index");
+        var that= this
+        mui.confirm("你确定要删除吗", "温馨提示", ["否", "是"], function (e) {
+            if (e.index === 1) {
+                var arr = getHistory();
+                var index = $(that).data("index");
 
-        arr.splice(index, 1);
+                arr.splice(index, 1);
 
-        //将数组重新存到缓存时要转化为json格式
-        localStorage.setItem("lt_search_history", JSON.stringify(arr));
-        render();
+                //将数组重新存到缓存时要转化为json格式
+                localStorage.setItem("lt_search_history", JSON.stringify(arr));
+                render();
+            }
+        })
     })
 
     //4. 添加搜索列表
@@ -57,24 +67,26 @@ $(function () {
     //4.5 重新设置到缓存里面
     //4.6 重新渲染
 
-    $(".search_btn").on("click",function(){
+    $(".search_btn").on("click", function () {
         var key = $(".search_input").val();
 
         var arr = getHistory();
         //判断输入的值是否存在数组中 如果有就删除掉
-        var index = arr.indexOf( key );
-        if(index != -1){
-            arr.splice(index , 1);
+        var index = arr.indexOf(key);
+        if (index != -1) {
+            arr.splice(index, 1);
         }
         //如果数组长度超过10个 就删除最早的一个
-        if(arr.length >= 10){
+        if (arr.length >= 10) {
             arr.pop();
         }
 
         arr.unshift(key);
 
-        localStorage.setItem("lt_search_history",JSON.stringify(arr));
+        localStorage.setItem("lt_search_history", JSON.stringify(arr));
 
         render();
+
+        location.href = "searchList.html?key="+key;
     })
 })
